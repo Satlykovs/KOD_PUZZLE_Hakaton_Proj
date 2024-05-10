@@ -87,6 +87,14 @@ builder.Services.AddSingleton<UserContext>(provider =>
 
 });
 
+builder.Services.AddSingleton<ITokenService>(sp =>
+{
+    string issuer = AuthOptions.ISSUER;
+    string audience = AuthOptions.AUDIENCE;
+    SecurityKey securityKey = AuthOptions.GetSymmetricSecurityKey();
+    ITokenService tokenService = new TokenService(issuer, audience, securityKey);
+    return tokenService;
+});
 
 
 var app = builder.Build();

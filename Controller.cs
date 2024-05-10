@@ -9,10 +9,10 @@ public class Controller : ControllerBase
     private readonly SignInManager<UserClass> _signInManager;
     private readonly RoleManager<Role> _roleManager;
     private readonly UserContext users;
-    private readonly TokenService _tokenService;
+    private readonly ITokenService _tokenService;
 
     public Controller(UserManager<UserClass> userManager, SignInManager<UserClass> signInManager,
-     RoleManager<Role> roleManager, TokenService tokenService)
+     RoleManager<Role> roleManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -76,9 +76,10 @@ public class Controller : ControllerBase
         var result = _signInManager.PasswordSignInAsync(name, password, false, false).Result;
         if (result.Succeeded)
         {
-            Console.WriteLine($"Текущий юзер зареган {User.Identity.IsAuthenticated}");
+            string token = Request.Headers["Authorization"];
+            Console.WriteLine(token);
 
-            return Ok(_tokenService.CreateToken(name));
+            return Ok(_tokenService.CreateToken(name, true));
         }
         else
         {
@@ -103,6 +104,7 @@ public class Controller : ControllerBase
     {
         _signInManager.SignOutAsync().Wait();
         Console.WriteLine($"Текущий юзер зареган: {User.Identity.IsAuthenticated}");
+        Console.WriteLine(User.Identity);
         return Ok();
         
     }
@@ -123,4 +125,5 @@ public class Controller : ControllerBase
         }
         return NotFound();
     }
+
 }

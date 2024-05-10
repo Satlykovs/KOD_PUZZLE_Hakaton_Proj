@@ -7,7 +7,9 @@ public class TokenService
 {
     public string CreateToken(string userName)
     {
-        var claims = new List<Claim> {new Claim(ClaimTypes.Name, userName)};
+        var claims = new List<Claim> {
+            new Claim(ClaimTypes.Name, userName)};
+        
         var jwt = new JwtSecurityToken(
             issuer: AuthOptions.ISSUER,
             audience: AuthOptions.AUDIENCE,

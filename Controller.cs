@@ -46,11 +46,18 @@ public class Controller : ControllerBase
     }
 }
 
-    [HttpGet("adduser")]
-    public async Task<IActionResult> CreateUser(string username, string email, string password)
+    [HttpPost("adduser")]
+    public async Task<IActionResult> CreateUser([FromBody] UserForm userForm)
 {
-    var user = new UserClass { UserName = username, Email = email };
-    var result = await _userManager.CreateAsync(user, password);
+    var user = new UserClass{
+        UserName = userForm.UserName,
+        FirstName = userForm.FirstName,
+        LastName = userForm.LastName,
+        DateOfBirth = userForm.DateOfBirth,
+        AvatarPath = "zaglushka.png",
+        Email = userForm.Email};
+
+    var result = await _userManager.CreateAsync(user, userForm.Password);
     if (result.Succeeded)
     {
         _signInManager.SignInAsync(user, false).Wait();

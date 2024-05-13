@@ -1,7 +1,10 @@
+
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+
 
 public class TokenService : ITokenService
 {
@@ -9,25 +12,28 @@ public class TokenService : ITokenService
     private readonly string _audience;
     private readonly SecurityKey _securityKey;
 
-        public TokenService(string issuer, string audience, SecurityKey securityKey)
+        public TokenService()
     {
-        _issuer = issuer;
-        _audience = audience;
-        _securityKey = securityKey;
+        _issuer = AuthOptions.ISSUER;
+        _audience = AuthOptions.AUDIENCE;
+        _securityKey = AuthOptions.GetSymmetricSecurityKey();
     }
 
-    public string CreateToken(string userName, bool isLoggedIn)
+    public string CreateToken(string email, List<string> roleNames)
     {
-        var claims = new List<Claim> {
-            new Claim(ClaimTypes.Name, userName),
-            new Claim("isLoggedIn", isLoggedIn.ToString())};
+        var claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Email, email));
+        foreach (var roleName in roleNames)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, roleName));
+        }
         
         var jwt = new JwtSecurityToken(
-            issuer: AuthOptions.ISSUER,
-            audience: AuthOptions.AUDIENCE,
+            issuer: _issuer,
+            audience: _audience,
             claims: claims,
             expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
-            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256)
+            signingCredentials: new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256)
         );
         return new JwtSecurityTokenHandler().WriteToken(jwt);    
     }

@@ -1,3 +1,5 @@
+
+
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -42,9 +45,11 @@ builder.Services.AddAuthorization(options => options.DefaultPolicy =
             (JwtBearerDefaults.AuthenticationScheme)
             .RequireAuthenticatedUser().Build());
 
-builder.Services.AddIdentity<UserClass, Role>()
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddEntityFrameworkStores<UserContext>()
             .AddDefaultTokenProviders();
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -87,15 +92,22 @@ builder.Services.AddSingleton<UserContext>(provider =>
 
 });
 
-builder.Services.AddSingleton<ITokenService>(sp =>
+builder.Services.AddTransient<ITokenService>(provider => 
 {
-    string issuer = AuthOptions.ISSUER;
-    string audience = AuthOptions.AUDIENCE;
-    SecurityKey securityKey = AuthOptions.GetSymmetricSecurityKey();
-    ITokenService tokenService = new TokenService(issuer, audience, securityKey);
+    ITokenService tokenService = new TokenService();
     return tokenService;
 });
 
+builder.Services.AddScoped<IEmailService>(provider =>
+{
+    IEmailService emailService = new EmailService();
+    return emailService;
+});
+
+
+
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -109,9 +121,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHub<UserHub>("/hubs/userhub");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthorization();
+
+
+
 
 app.MapControllers();
 app.Run();

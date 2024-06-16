@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Sanjar\\Desktop\\CodeAndPuzzleProject\\wwwroot\\LessonVideos\\47e4bcaf-4b17-4df9-a43d-1aa4dc24058a_video_2024-05-14_03-28-12.mp4",
+      "PackagePath": "staticwebassets\\LessonVideos\\47e4bcaf-4b17-4df9-a43d-1aa4dc24058a_video_2024-05-14_03-28-12.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Sanjar\\Desktop\\CodeAndPuzzleProject\\wwwroot\\LessonVideos\\bcc9cfef-8e6a-4349-a6a2-21033276b944_video_2024-05-14_03-28-12.mp4",
+      "PackagePath": "staticwebassets\\LessonVideos\\bcc9cfef-8e6a-4349-a6a2-21033276b944_video_2024-05-14_03-28-12.mp4"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CodeAndPuzzleProject.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CodeAndPuzzleProject.props",
+      "PackagePath": "build\\CodeAndPuzzleProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CodeAndPuzzleProject.props",
+      "PackagePath": "buildMultiTargeting\\CodeAndPuzzleProject.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CodeAndPuzzleProject.props",
+      "PackagePath": "buildTransitive\\CodeAndPuzzleProject.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

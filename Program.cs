@@ -1,5 +1,3 @@
-
-
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +11,17 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://127.0.0.1:5500")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();
+    });
+});
+
 
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddAuthentication(options =>
@@ -105,14 +114,38 @@ builder.Services.AddScoped<IEmailService>(provider =>
 });
 
 
+builder.Services.AddScoped<ILessonService>(provider =>
+{
+    var options = new DbContextOptionsBuilder<LessonContext>();
+    options.UseSqlite("Data Source=LessonDatabase.db");
+    var lessonContext = new LessonContext(options.Options);
+    lessonContext.Database.EnsureCreated();
+    ILessonRepository lessonRepository = new LessonRepository(lessonContext);
+    ILessonService lessonService = new LessonService(lessonRepository);
+    return lessonService;
+});
+
+builder.Services.AddSingleton<IUserValidatorService>(provider =>
+{
+    IUserValidatorService userValidatorService = new UserValidatorService();
+    return userValidatorService;
+});
 
 
-builder.Services.AddSignalR();
+
+
 
 var app = builder.Build();
 
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -121,14 +154,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapHub<UserHub>("/hubs/userhub");
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseAuthorization();
-
-
-
-
 app.MapControllers();
+app.UseCors();
 app.Run();

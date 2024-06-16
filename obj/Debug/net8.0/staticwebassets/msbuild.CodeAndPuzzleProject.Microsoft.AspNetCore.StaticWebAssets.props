@@ -1,0 +1,36 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LessonVideos\47e4bcaf-4b17-4df9-a43d-1aa4dc24058a_video_2024-05-14_03-28-12.mp4))">
+      <SourceType>Package</SourceType>
+      <SourceId>CodeAndPuzzleProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CodeAndPuzzleProject</BasePath>
+      <RelativePath>LessonVideos/47e4bcaf-4b17-4df9-a43d-1aa4dc24058a_video_2024-05-14_03-28-12.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LessonVideos\47e4bcaf-4b17-4df9-a43d-1aa4dc24058a_video_2024-05-14_03-28-12.mp4))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LessonVideos\bcc9cfef-8e6a-4349-a6a2-21033276b944_video_2024-05-14_03-28-12.mp4))">
+      <SourceType>Package</SourceType>
+      <SourceId>CodeAndPuzzleProject</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CodeAndPuzzleProject</BasePath>
+      <RelativePath>LessonVideos/bcc9cfef-8e6a-4349-a6a2-21033276b944_video_2024-05-14_03-28-12.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\LessonVideos\bcc9cfef-8e6a-4349-a6a2-21033276b944_video_2024-05-14_03-28-12.mp4))</OriginalItemSpec>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

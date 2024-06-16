@@ -18,7 +18,7 @@ public class EmailService : IEmailService
         _toAddressName = EMailServiceOptions.toAddressName;
         _smtpServer = EMailServiceOptions.smtpServer;
     }
-    public async Task SendEmail(string toAddress, string subject, string body, bool isHtml)
+    public async Task SendEmailAsync(string toAddress, string subject, string body, bool isHtml)
     {
         SmtpClient client = new SmtpClient(_smtpServer);
 
@@ -37,6 +37,7 @@ public class EmailService : IEmailService
 
         message.Subject = subject;
         message.Body = body;
+
 
         message.SubjectEncoding = System.Text.Encoding.UTF8;
         message.BodyEncoding = System.Text.Encoding.UTF8;

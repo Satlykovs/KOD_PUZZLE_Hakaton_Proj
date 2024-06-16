@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "Tn4U0MxeqheqDtM8AWopZrpbgq+vvHznGcbO+fGCIeM=",
-  "Source": "test",
-  "BasePath": "_content/test",
+  "Hash": "ltil0FCPoGOUa07MktJF8FiC0chlY0g8Paqaj/zGggs=",
+  "Source": "CodeAndPuzzleProject",
+  "BasePath": "_content/CodeAndPuzzleProject",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CodeAndPuzzleProject\\wwwroot",
+      "Source": "CodeAndPuzzleProject",
+      "ContentRoot": "C:\\Users\\Sanjar\\Desktop\\test\\wwwroot\\",
+      "BasePath": "_content/CodeAndPuzzleProject",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

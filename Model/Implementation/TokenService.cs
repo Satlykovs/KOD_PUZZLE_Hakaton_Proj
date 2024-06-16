@@ -32,7 +32,7 @@ public class TokenService : ITokenService
             issuer: _issuer,
             audience: _audience,
             claims: claims,
-            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+            expires: DateTime.UtcNow.Add(TimeSpan.FromDays(2)),
             signingCredentials: new SigningCredentials(_securityKey, SecurityAlgorithms.HmacSha256)
         );
         return new JwtSecurityTokenHandler().WriteToken(jwt);    
@@ -57,9 +57,11 @@ public class TokenService : ITokenService
             var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
             return principal;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.WriteLine(ex);
             return null;
         }
+
     }
 }
